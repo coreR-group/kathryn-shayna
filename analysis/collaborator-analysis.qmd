@@ -35,6 +35,42 @@ head(lobster_traps)
 
 glimpse(lobster_traps)
 
+unique(lobster_traps$TRAPS)
+
+```
+
+## Question 1 
+
+### clean data
+```{r}
+lobster_traps <- lobster_traps %>% 
+  mutate(TRAPS = na_if(TRAPS,-99999))
+
+unique(lobster_traps$TRAPS)
+```
+
+
+## Question 2
+
+### subset data to remove Naples Reef (NAPL)
+```{r}
+lobster_no_naples <- lobster_traps %>% 
+  filter(SITE != "NAPL")
+
+unique(lobster_traps$SITE)
+unique(lobster_no_naples$SITE)
+```
+
+
+## Question 3
+
+### subset data for lobsters at Carpinteria Reef (CARP) OR with number of traps > 20
+```{r}
+lobsters_carp_20traps <- lobster_traps %>% 
+  filter(TRAPS > 20 | SITE =="CARP")
+
+unique(lobsters_carp_20traps$SITE)
+unique(lobsters_carp_20traps$TRAPS)
 ```
 
 
