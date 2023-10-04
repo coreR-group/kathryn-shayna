@@ -1,5 +1,41 @@
 ---
 title: "Collaborator Analysis"
+author: "Shayna Sura"
 format: html
 ---
+
+## Exercise: Explore, Clean, and Wrangle Data
+
+### load libraries
+```{r}
+#| warning: false
+#| message: false
+
+library(readr)
+library(dplyr)
+library(ggplot2)
+library(tidyr)
+```
+
+### read data
+```{r}
+lobster_traps <- read_csv("../data/Lobster_Trap_Counts_All_Years_20210519.csv")
+```
+
+
+<!--
+## Explore Data
+-->
+
+```{r}
+#| eval: false
+#| echo: false
+
+head(lobster_traps)
+
+glimpse(lobster_traps)
+
+```
+
+
 
