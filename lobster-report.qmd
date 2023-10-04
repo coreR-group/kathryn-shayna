@@ -35,3 +35,25 @@ unique(lobster_abundance$SITE)
 summary(lobster_abundance)
 ```
 
+```{r}
+lobster_abundance <- lobster_abundance %>% 
+  mutate(SIZE_MM = na_if(SIZE_MM, -99999))
+
+unique(lobster_abundance$SIZE_MM)
+```
+
+
+
+```{r}
+not_napl <- lobster_abundance %>% 
+  filter(SITE != "NAPL")
+
+unique(not_napl$SITE)
+```
+
+```{r}
+aque_70mm <- lobster_abundance %>% 
+  filter(SITE == "AQUE",
+         SIZE_MM >= 70)
+```
+
