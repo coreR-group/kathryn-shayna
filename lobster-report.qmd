@@ -4,3 +4,88 @@ author: "Kathryn Tomasi & Shayna Sura"
 format: html
 ---
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Lobster trap data per year.
+
+```{r}
+#| warning: false
+#| message: false
+#| echo: false
+
+#load data
+lobster_traps <- read_csv("data/Lobster_Trap_Counts_All_Years_20210519.csv")
+
+#clean data
+lobster_traps <- lobster_traps %>% 
+  mutate(TRAPS = na_if(TRAPS,-99999))
+
+#plot data
+fig1<-ggplot(lobster_traps) +
+  geom_histogram(aes(x = TRAPS),
+                 bins = 50) +
+  facet_wrap(~YEAR,
+             nrow = 5,
+             ncol = 2) +
+  theme_bw() +
+  xlab("Number of Traps") +
+  ylab("Frequency")
+
+fig1
+```
+
+
+
