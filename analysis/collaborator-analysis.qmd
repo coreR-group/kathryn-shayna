@@ -4,7 +4,7 @@ author: "Shayna Sura"
 format: html
 ---
 
-## Exercise: Explore, Clean, and Wrangle Data
+# Exercise: Explore, Clean, and Wrangle Data
 
 ### load libraries
 ```{r}
@@ -74,4 +74,92 @@ unique(lobsters_carp_20traps$TRAPS)
 ```
 
 
+
+# Exercise: Data Visualization
+
+## Question 7: Create a multi-panel plot of lobster commercial traps (TRAPS) grouped by year, using ggplot(), geom_histogram(), and facet_wrap(). Use the variable YEAR in facet_wrap(). Use the object lobster_traps.
+```{r}
+ggplot(lobster_traps) +
+  geom_histogram(aes(x = TRAPS)) +
+  facet_wrap(~YEAR,
+             nrow = 5,
+             ncol = 2)
+
+```
+
+
+```{r}
+# checking the number of NA values in the lobster_trap table. this number matches the number in the warning message from the ggplot.
+sum(is.na(lobster_traps$TRAPS))
+```
+
+
+## Question 8: Create a line graph of the number of total lobster commercial traps observed (y-axis) by year (x-axis) in the study, grouped by SITE.
+```{r}
+
+#summarize the data first
+lobsters_traps_summarize <- lobster_traps %>% 
+  group_by(YEAR, SITE) %>% 
+  summarize(TOTAL_TRAPS = sum(TRAPS, na.rm = TRUE))
+
+ggplot(lobsters_traps_summarize,
+       aes(x=YEAR,
+           y=TOTAL_TRAPS,
+           color=SITE)) +
+  geom_point() +
+  geom_line()
+```
+
+
+## Question 9: Create a bar graph that shows the amount of high and low fishing pressure of lobster commercial traps at each SITE from 2019-2021. Note: The high and low fishing pressure metrics are completely made up and are not based on any known facts.
+```{r}
+lobster_traps_fishing_pressure <- lobster_traps %>% 
+  filter(YEAR %in% c(2019, 2020, 2021)) %>% 
+  mutate(FISHING_PRESSURE = if_else(TRAPS>=8, "high", "low")) %>% 
+  group_by(FISHING_PRESSURE, SITE) %>% 
+  summarize(COUNT = n()) %>% 
+  drop_na()
+```
+
+
+```{r}
+ggplot(lobster_traps_fishing_pressure,
+       aes(x=SITE,
+           y=COUNT,
+           fill=FISHING_PRESSURE)) +
+    geom_col()
+  # geom_col(position="dodge")
+```
+
+
+## Question 10: Go back to your visualization code and add some styling code (aka make your plots pretty!). Again, start with one plot and if there’s time add styling code to additional plots. Here’s a list of functions to help you get started (this is not an exhaustive list!) or revisit the data visualization lesson:
+
+
+### Figure 1. Panel figure of lobster traps histogram per year.
+```{r}
+
+fig1<-ggplot(lobster_traps) +
+  geom_histogram(aes(x = TRAPS),
+                 bins = 50) +
+  facet_wrap(~YEAR,
+             nrow = 5,
+             ncol = 2) +
+  theme_bw() +
+  xlab("Number of Traps") +
+  ylab("Frequency")
+
+fig1
+
+
+ggsave(filename = "fig1.png",
+       plot = fig1,
+       path = "../figs/")
+
+# ggsave("../figs/fig1.png")
+
+```
+
+
+
+### Figure 2. 
 
