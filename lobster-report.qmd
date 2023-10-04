@@ -5,6 +5,13 @@ format: html
 bibliography: references.bib
 ---
 
+<!--
+We published this report as a page on GitHub on October 4, 2023. This report can be found online at this website URL: https://kathryntomasi.github.io/kathryn-shayna/lobster-report.html
+
+-->
+
+
+
 ```{r}
 #| echo: false
 #| warning: false
