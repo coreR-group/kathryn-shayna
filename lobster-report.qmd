@@ -1,5 +1,37 @@
 ---
 title: "Lobster Report"
+author: "Kathryn Tomasi"
 format: html
 ---
+
+## Exercise: Explore, Clean, and Wrangle Data
+
+```{r}
+#| warning: false
+#| message: false
+library(readr)
+library(dplyr)
+library(ggplot2)
+library(tidyr)
+```
+
+```{r}
+#| warning: false
+#| message: false
+lobster_abundance <- read_csv("data/Lobster_Abundance_All_Years_20220829.csv")
+```
+
+Exploring the data
+
+```{r}
+colnames(lobster_abundance)
+
+str(lobster_abundance)
+
+head(lobster_abundance)
+
+unique(lobster_abundance$SITE)
+
+summary(lobster_abundance)
+```
 
